@@ -19,19 +19,14 @@ async function fetchItems() {
     try {
         const response = await fetch(API_URL); 
         const data = await response.json();
-
-        // If Lambda returns stringified body, parse it
         const parsed = data.Items ? data : JSON.parse(data.body);
         const items = parsed.Items || [];
 
         items.forEach(item => {
-            // Render the item on the page
-            console.log("Item:", item); // For testing
+            console.log("Item:", item);
         });
     } catch (error) {
         console.error("Error fetching items:", error);
     }
 }
-
-
 window.onload = fetchItems;
